@@ -41,6 +41,22 @@ class _LoginBodyState extends State<LoginBody> {
                   _passwordController.text = value;
                 },
               ),
+              const SizedBox(height: 8,),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+
+                  },
+                  child: const Text(
+                    'Forget Password? ',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 15,
+                      fontStyle: FontStyle.italic,)
+                  ),
+                ),
+              ),
           ]
         ),
       )
