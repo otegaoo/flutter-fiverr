@@ -3,6 +3,8 @@ import 'package:fiverr/Widgets/rounded_input_field.dart';
 import 'package:fiverr/Widgets/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 
+import '../ForgetPassword/forget_password.dart';
+
 class LoginBody extends StatefulWidget {
 
   @override
@@ -46,7 +48,8 @@ class _LoginBodyState extends State<LoginBody> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ForgetPassword()));
                   },
                   child: const Text(
                     'Forget Password? ',
