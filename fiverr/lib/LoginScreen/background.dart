@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LoginBackground extends StatelessWidget {
-  //final Widget child;
+  
+  final Widget child;
 
-  //const WelcomeBackground({required this.child});
+  LoginBackground({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class LoginBackground extends StatelessWidget {
               color: Colors.deepPurple.shade300,
               width: size.width * 0.2,)
               ),
-              //child,
+              child,
         ],
         )
     );
