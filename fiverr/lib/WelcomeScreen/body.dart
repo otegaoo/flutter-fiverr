@@ -48,6 +48,7 @@ class WelcomeBody extends StatelessWidget {
               ),
             ],
           ),
-      ),);
+      ),
+    );
   }
 }
