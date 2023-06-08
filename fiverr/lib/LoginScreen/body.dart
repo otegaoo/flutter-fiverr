@@ -1,4 +1,7 @@
 import 'package:fiverr/LoginScreen/background.dart';
+import 'package:fiverr/SignupScreen/signup_screen.dart';
+import 'package:fiverr/Widgets/already_have_an_account_check.dart';
+import 'package:fiverr/Widgets/rounded_button.dart';
 import 'package:fiverr/Widgets/rounded_input_field.dart';
 import 'package:fiverr/Widgets/rounded_password_field.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +62,21 @@ class _LoginBodyState extends State<LoginBody> {
                       fontStyle: FontStyle.italic,)
                   ),
                 ),
+              ),
+              RoundedButton(
+                text: 'LOGIN',
+                press: () {
+
+                },
+              ),
+              SizedBox(height: size.height * 0.03,
+              ),
+              AlreadyHaveAnAccountCheck(
+                login: true,
+                press: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignupScreen()));
+                },
               ),
           ]
         ),
