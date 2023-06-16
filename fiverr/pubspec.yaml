@@ -40,7 +40,7 @@ dependencies:
   cloud_firestore: ^4.8.0
   timeago: ^3.4.0
   intl: ^0.18.1
-  image_picker: ^0.8.7+5
+  image_picker: ^0.8.8
   image_cropper: ^4.0.1
   fluttertoast: ^8.2.2
   firebase_storage: ^11.2.2
