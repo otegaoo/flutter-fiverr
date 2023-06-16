@@ -1,3 +1,4 @@
+import 'package:fiverr/ForgetPassword/body.dart';
 import 'package:flutter/material.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -10,7 +11,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Forget Password Screen'),),
+      body: ForgetBody()
     );
   }
 }
