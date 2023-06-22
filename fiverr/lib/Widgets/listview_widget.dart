@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiverr/Widgets/global_variable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 class ListViewWidget extends StatefulWidget {
 
-String docId, itemColor, img1, img2, img3, img4, img5, userImg, name, userId, itemName, postId;
+String docId, itemColor, img1, img2, img3, img4, img5, userImg, name, userId, itemName, description, postId;
 String itemPrice, decoration, address, userNumber;
 DateTime date;
 double lat, lng;
@@ -26,6 +27,7 @@ ListViewWidget({
   required this.postId, 
   required this.itemPrice, 
   required this.itemName, 
+  required this.description,
   required this.decoration, 
   required this.address, 
   required this.date, 
@@ -304,9 +306,64 @@ class _ListViewWidgetState extends State<ListViewWidget> {
                             color: Colors.white60,
                           ),
                         ),
-                        const SizedBox(height: 5.0,),
                       ],
                     ),
+                    widget.userId != uid
+                    ?
+                    const Padding(
+                        padding: EdgeInsets.only(right: 50.0),
+                        child: Column(),
+                      )
+                    :
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: ()
+                            {
+                              showDialogForUpdateData(
+                                widget.docId,
+                                widget.name, 
+                                widget.userNumber,
+                                widget.itemPrice, 
+                                widget.itemColor, 
+                                widget.itemName, 
+                                widget.description,
+                                );
+                            },
+                            icon: const Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Icon(
+                                Icons.edit_note,
+                                color: Colors.white,
+                                size: 27,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: ()
+                            {
+                              FirebaseFirestore.instance.collection('items')
+                                .doc(widget.postId)
+                                .delete();
+                              Fluttertoast.showToast(
+                                msg: 'Post Has Been Deleted',
+                                toastLength: Toast.LENGTH_LONG,
+                                backgroundColor: Colors.grey,
+                                fontSize: 18.0,
+                                );
+                            },
+                            icon: const Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Icon(
+                                Icons.delete_forever,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                   ],
                 ),
               ),
