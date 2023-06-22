@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiverr/SearchProduct/search_product.dart';
 import 'package:fiverr/UploadAdScreen/upload_ad_screen.dart';
 import 'package:fiverr/WelcomeScreen/welcome_screen.dart';
+import 'package:fiverr/Widgets/listview_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -143,6 +144,63 @@ void initState() {
               )
             ),
           ),
+        ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+            .collection('items')
+            .orderBy('time', descending: true)
+            .snapshots(),
+          builder: (context, AsyncSnapshot snapshot)
+          {
+            if(snapshot.connectionState == ConnectionState.waiting)
+            {
+              return Center(child: CircularProgressIndicator(),);
+            }
+            else if(snapshot.connectionState == ConnectionState.active)
+            {
+              if(snapshot.data!.docs.isNotEmpty)
+              {
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (BuildContext context, int index)
+                  {
+                    return ListViewWidget(
+                      docId: snapshot.data!.docs[index].id,
+                      itemColor: snapshot.data!.docs[index]['itemColor'],
+                      img1: snapshot.data!.docs[index]['urlImage1'], 
+                      img2: snapshot.data!.docs[index]['urlImage2'], 
+                      img3: snapshot.data!.docs[index]['urlImage3'], 
+                      img4: snapshot.data!.docs[index]['urlImage4'],
+                      img5: snapshot.data!.docs[index]['urlImage5'],
+                      userImg: snapshot.data!.docs[index]['imgPro'],
+                      name: snapshot.data!.docs[index]['userName'], 
+                      userId: snapshot.data!.docs[index]['id'], 
+                      userNumber: snapshot.data!.docs[index]['userNumber'], 
+                      postId: snapshot.data!.docs[index]['postId'], 
+                      itemPrice: snapshot.data!.docs[index]['itemPrice'], 
+                      itemName: snapshot.data!.docs[index]['itemName'],
+                      description: snapshot.data!.docs[index]['description'], 
+                      address: snapshot.data!.docs[index]['address'], 
+                      date: snapshot.data!.docs[index]['time'].toDate(), 
+                      lat: snapshot.data!.docs[index]['lat'], 
+                      lng: snapshot.data!.docs[index]['lng'],
+                    );
+                  },
+                );
+              }
+              else {
+                return const Center(
+                  child: Text('There is no tasks'),
+                );
+              }
+            }
+            return const Center(
+              child: Text(
+                'Something went wrong',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)
+              ),
+            );
+          }
         ),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Add Post',

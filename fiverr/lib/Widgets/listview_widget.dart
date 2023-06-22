@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiverr/ImageSliderScreen/image_slider_screen.dart';
 import 'package:fiverr/Widgets/global_variable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,7 +9,7 @@ import 'package:intl/intl.dart';
 class ListViewWidget extends StatefulWidget {
 
 String docId, itemColor, img1, img2, img3, img4, img5, userImg, name, userId, itemName, description, postId;
-String itemPrice, decoration, address, userNumber;
+String itemPrice, address, userNumber;
 DateTime date;
 double lat, lng;
 
@@ -28,7 +29,6 @@ ListViewWidget({
   required this.itemPrice, 
   required this.itemName, 
   required this.description,
-  required this.decoration, 
   required this.address, 
   required this.date, 
   required this.lat, 
@@ -245,7 +245,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.orange, Colors.teal],
+              colors: [Colors.deepPurpleAccent, Colors.purple],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               stops: [0.0, 1.0],
@@ -260,7 +260,21 @@ class _ListViewWidgetState extends State<ListViewWidget> {
               GestureDetector(
                 onDoubleTap: ()
                 {
-
+                  Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ImageSliderScreen(
+                    title: widget.itemName,
+                    urlImage1: widget.img1,
+                    urlImage2: widget.img2,
+                    urlImage3: widget.img3,
+                    urlImage4: widget.img4,
+                    urlImage5: widget.img5,
+                    userNumber: widget.userNumber,
+                    description: widget.description,
+                    itemColor: widget.itemColor,
+                    itemPrice: widget.itemPrice,
+                    address: widget.address,
+                    lat: widget.lat,
+                    lng: widget.lng)));
                 },
                 child: Image.network(
                   widget.img1,
